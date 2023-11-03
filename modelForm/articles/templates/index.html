@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>index</h1>
+
+    {% for article in articles %}
+        <hr>
+        <p>{{ article.title }}</p>
+        <br>
+        <p>{{ article.content }}</p>
+        <br>
+        <a href="{% url 'articles:delete' id=article.id %}">delete</a>
+        <a href="{% url 'articles:update' id=article.id %}">update</a>
+        <hr>
+    {% endfor %}
+{% endblock %}
