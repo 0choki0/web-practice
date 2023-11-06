@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Article
+from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 # Create your views here.
 
@@ -16,9 +16,21 @@ def detail(request, id):
     article = Article.objects.get(id=id)
     form = CommentForm()
 
+    # Comment 목록 조회 기능 구현
+
+    ## 첫번째 방법
+    # comments = Comment.objects.filter(article=article)
+
+    ## 두번째 방법
+    # comments = article.comment_set.all()
+
+    ## 세번째 방법
+    # HTML 코드에서 article.comment_set.all을 사용
+
     context = {
         'article': article,
         'form': form,
+        # 'comments': comments,
     }
 
     return render(request, 'detail.html', context)
@@ -57,3 +69,9 @@ def comment_create(request, article_id):
         comment.save()
 
         return redirect('articles:detail', id=article_id)
+
+def comment_delete(request, article_id, id):
+    comment = Comment.objects.get(id=id)
+    comment.delete()
+
+    return redirect('articles:detail', id=article_id)

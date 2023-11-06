@@ -11,4 +11,16 @@
         {{ form }}
         <input type="submit">
     </form>
+
+    <hr>
+<!-- 
+    {% for comment in comments %}
+        <p>{{ comment.content }}</p>
+    {% endfor%} -->
+
+    {% for comment in article.comment_set.all %}
+        <p>{{ comment.content }}</p>
+        <a href="{% url 'articles:comment_delete' article_id=article.id id=comment.id %}">delete</a>
+    {% endfor%}
+
 {% endblock %}
