@@ -18,3 +18,8 @@ class Article(models.Model):
 
     ## 방법3. (권장)
     # user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    content = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

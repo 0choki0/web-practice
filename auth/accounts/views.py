@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUsercreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 
@@ -27,7 +27,10 @@ def login(request):
         if form.is_valid():
             # 로그인
             auth_login(request, form.get_user())
-            return redirect('articles:index')
+            next_url = request.GET.get('next')
+
+
+            return redirect(next_url or 'articles:index')
     else:
         form = CustomAuthenticationForm()
 
