@@ -1,5 +1,6 @@
 from django.db import models
 from django_resized import ResizedImageField
+from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
@@ -8,6 +9,8 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # image = models.ImageField(upload_to='image/%Y/%m')
     image = ResizedImageField(
-        size=[200, 200],
+        size=[300, 300],
         crop=['middle', 'center'],
-        upload_to='image/%Y/%m')
+        upload_to='image/%Y/%m'
+        )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
