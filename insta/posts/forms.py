@@ -4,5 +4,5 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
-        exclude = ('user', )
+        # fields = '__all__'
+        exclude = ('user', 'like_users',)
