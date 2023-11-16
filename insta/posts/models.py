@@ -9,7 +9,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # image = models.ImageField(upload_to='image/%Y/%m')
     image = ResizedImageField(
-        size=[300, 300],
+        size=[500, 500],
         crop=['middle', 'center'],
         upload_to='image/%Y/%m'
         )
